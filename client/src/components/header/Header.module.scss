@@ -1,0 +1,28 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 91px;
+  background-color: #111111;
+}
+
+.items {
+  margin: 0 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sidebarBtn {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .sidebarBtn {
+    display: block;
+  }
+}

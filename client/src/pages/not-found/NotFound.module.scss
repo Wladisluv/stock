@@ -1,0 +1,14 @@
+.notFoundWrap {
+  display: grid;
+  justify-content: center;
+}
+
+.notFoundInner {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 170px);
+
+  h1 {
+    font-size: 79px;
+  }
+}

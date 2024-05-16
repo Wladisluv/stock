@@ -1,0 +1,49 @@
+.inner {
+  margin: 20px;
+
+  h1 {
+    color: black;
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainTop {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: bold;
+  color: #cacacf;
+
+  div {
+    width: 200px;
+  }
+}
+
+.contentItem {
+  .contentInner {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #0b0b0b;
+
+    div {
+      width: 200px;
+    }
+  }
+}
+
+.element::-webkit-scrollbar {
+  width: 0;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}

@@ -1,0 +1,30 @@
+.sidebar {
+  background-color: #111111 !important;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+  }
+}
+
+.text {
+  a {
+    display: flex;
+  }
+  span {
+    font-size: 22px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}
