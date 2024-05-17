@@ -10,6 +10,10 @@
 /client/build
 
 # misc
-/client/.DS_Store
+.DS_Store
 /client/.env
 /client/npm-debug.log
+
+# backend
+/server/node_modules
+/server/src/.env
