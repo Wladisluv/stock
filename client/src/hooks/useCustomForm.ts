@@ -8,25 +8,15 @@ const useCustomForm = () => {
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
 
-  const [inputErrors, setInputErrors] = useState<Partial<IGood>>({
-    firstName: "",
-    lastName: "",
-    hireDate: "",
-  });
+  const [inputErrors, setInputErrors] = useState<Partial<IGood>>({});
 
   const [formData, setFormData] = useState<IGood>({
-    firstName: "",
-    lastName: "",
-    hireDate: null,
-    categoryId: null,
-    category: {
-      title: "",
-    },
-    location: {
-      title: "",
-      lat: 0,
-      lng: 0,
-    },
+    title: "",
+    category_id: 0,
+    price: 0,
+    manufacturer_id: 0,
+    amount: 0,
+    characteristic: "",
   });
 
   const validateForm = (
@@ -36,21 +26,6 @@ const useCustomForm = () => {
   ) => {
     let isValid = true;
     const errors: Partial<IGood> = {};
-
-    if (firstNameRef.current?.value === "") {
-      errors.firstName = "First name is required";
-      isValid = false;
-    }
-
-    if (lastNameRef.current?.value === "") {
-      errors.lastName = "Last name is required";
-      isValid = false;
-    }
-
-    if (selectedDate === null) {
-      errors.hireDate = "Hire date is required";
-      isValid = false;
-    }
 
     setInputErrors(errors);
     setHasErrors(!isValid);
@@ -66,38 +41,6 @@ const useCustomForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleFormSubmit = async (
-    forWhat: string,
-    selectedDate?: Date | null,
-    goodId?: number,
-    goodLoc?: any,
-    posId?: number
-  ) => {
-    const isValid = validateForm(selectedDate);
-
-    if (!isValid) {
-      return;
-    }
-
-    const newFormData: IGood = {
-      firstName: firstNameRef.current?.value || "",
-      lastName: lastNameRef.current?.value || "",
-      hireDate: dayjs(selectedDate).format("DD MMM YYYY"), // Собираем дату с элементов в диалоге
-      categoryId: posId || null,
-      location: {
-        title: goodLoc.loc,
-        lng: goodLoc.lng,
-        lat: goodLoc.lat,
-      },
-    };
-
-    setFormData(newFormData);
-
-    forWhat === "add"
-      ? goodsStore.addGood(newFormData)
-      : goodsStore.updateGood(goodId!, newFormData);
-  };
-
   return {
     firstNameRef,
     lastNameRef,
@@ -105,8 +48,6 @@ const useCustomForm = () => {
     setFormData,
     handleInputChange,
     inputErrors,
-    handleFormSubmit,
-    hasErrors,
   };
 };
 

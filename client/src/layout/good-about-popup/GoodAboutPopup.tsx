@@ -22,15 +22,15 @@ const GoodAboutPopup = ({ good, open, close }: Props) => {
           <div className={styles.about}>
             <div className={styles.item}>
               <p>Good name:</p>
-              {good.firstName} {good.lastName}
+              {good.category} {good.amount}
             </div>
             <div className={styles.item}>
               <p>Good category:</p>
-              {good.category?.title} {good.hireDate}
+              {good.amount} {good.amount}
             </div>
             <div className={styles.item}>
               <p>Good address:</p>
-              {good.location?.title}
+              {good.amount}
             </div>
           </div>
         </DialogContent>

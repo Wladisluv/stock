@@ -14,6 +14,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import PublicIcon from "@mui/icons-material/Public";
 
 import styles from "./Sidebar.module.scss";
+import { Factory, MonetizationOn } from "@mui/icons-material";
 
 interface Props {
   open?: boolean;
@@ -24,18 +25,28 @@ type Anchor = "left";
 
 const Sidebar = ({ open, handleSidebarToggle }: Props) => {
   const links = (text: string) => {
-    if (text.toLowerCase() === 'товары и материалы') {
-      text = 'goods'
-    } else if (text.toLowerCase() === 'о нас') {
-      text = 'about-us'
-    } else if (text.toLowerCase() === 'категории') {
-      text = 'categories'
+    if (text.toLowerCase() === "товары и материалы") {
+      text = "goods";
+    } else if (text.toLowerCase() === "о нас") {
+      text = "about-us";
+    } else if (text.toLowerCase() === "категории") {
+      text = "categories";
+    } else if (text.toLowerCase() === "заявки") {
+      text = "supply";
+    } else if (text.toLowerCase() === "производители") {
+      text = "manufacturers";
     }
 
-    console.log('text',text)
-    return text
-  }
-  const icons = [AccountCircleIcon, WorkIcon, PublicIcon];
+    console.log("text", text);
+    return text;
+  };
+  const icons = [
+    AccountCircleIcon,
+    WorkIcon,
+    MonetizationOn,
+    Factory,
+    PublicIcon,
+  ];
   const list = (anchor: Anchor) => (
     <>
       <div className={styles.title}>
@@ -43,9 +54,15 @@ const Sidebar = ({ open, handleSidebarToggle }: Props) => {
       </div>
       <Divider sx={{ bgcolor: "#8D8D8D" }} />
       <List className={styles.list}>
-        {['Товары и материалы', "Категории"].map((text, index) => (
+        {[
+          "Товары и материалы",
+          "Категории",
+          "Заявки",
+          "Производители",
+          "О нас",
+        ].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <Link to={links(text)} style={{ width: "100%", maxWidth: '200px' }}>
+            <Link to={links(text)} style={{ width: "100%", maxWidth: "200px" }}>
               <ListItemButton onClick={handleSidebarToggle}>
                 <ListItemIcon style={{ color: "#fff" }}>
                   {React.createElement(icons[index])}
@@ -55,16 +72,6 @@ const Sidebar = ({ open, handleSidebarToggle }: Props) => {
             </Link>
           </ListItem>
         ))}
-        <ListItem disablePadding>
-            <Link to={'about-us'} style={{ width: "100%" }}>
-              <ListItemButton onClick={handleSidebarToggle}>
-                <ListItemIcon style={{ color: "#fff" }}>
-                  {React.createElement(PublicIcon)}
-                </ListItemIcon>
-                <ListItemText primary={'О нас'} className={styles.text} />
-              </ListItemButton>
-            </Link>
-          </ListItem>
       </List>
     </>
   );

@@ -32,7 +32,7 @@ const Header = ({ isAuthPage = false }: Props) => {
           </div>
         )}
         <div>
-          <h2>{isAuthPage ? "Сток" : "Wladisluv"}</h2>
+          <h2>{isAuthPage ? "Сток" : "vladvavula@gmail.com"}</h2>
         </div>
       </div>
       {isAuthPage ? null : (

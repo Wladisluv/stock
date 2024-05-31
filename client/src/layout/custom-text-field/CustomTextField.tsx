@@ -7,7 +7,7 @@ enum TextFieldVariants {
 }
 
 interface Props {
-  title: string;
+  title?: string;
   error?: string;
   focus?: boolean;
   id: string;
@@ -21,12 +21,14 @@ interface Props {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>, id?: number) => void;
   children?: React.ReactNode;
   className?: string;
+  value?: any;
 }
 
 const CustomTextField = ({
   title,
   error,
   focus,
+  value,
   id,
   label,
   type,
@@ -47,6 +49,7 @@ const CustomTextField = ({
         autoFocus={focus}
         margin="dense"
         id={id}
+        value={value}
         label={label}
         type={type}
         fullWidth

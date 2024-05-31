@@ -18,7 +18,7 @@ const MainLayout = () => {
             position: "fixed",
             top: "111px",
             right: "20px",
-            left: "220px",
+            left: "270px",
             bottom: "20px",
             borderRadius: "25px",
             backgroundColor: "#fff",

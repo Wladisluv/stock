@@ -5,9 +5,9 @@ import "dayjs/locale/en-gb";
 import styles from "./CustomDatePicker.module.scss";
 
 interface Props {
-  onChange: (selectedDate: Date | null) => void;
-  defaultValue: Date | null;
-  error: string | undefined;
+  onChange?: (selectedDate: Date | null) => void;
+  defaultValue?: Date | null;
+  error?: string | undefined;
 }
 
 const CustomDatePicker = ({ onChange, defaultValue, error }: Props) => {

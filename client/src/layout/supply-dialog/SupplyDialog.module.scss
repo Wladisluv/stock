@@ -1,0 +1,35 @@
+.modal {
+  h2 {
+    font-size: 22px;
+    color: #000000;
+  }
+}
+
+.paper {
+  padding: 10px 0 !important;
+  max-width: 800px !important;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.middle {
+  display: flex;
+}
+
+.alert {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520px;
+  height: 50px;
+}
+
+@media (max-width: 770px) {
+  .textField {
+    max-width: 280px;
+  }
+}

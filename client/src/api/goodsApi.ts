@@ -5,22 +5,21 @@ const BASE_URL = process.env.REACT_APP_GOODS_BASE_URL;
 
 export const goodsApi = {
   getGoods: async () => {
-    const response = await axios.get(BASE_URL!, {
-      validateStatus: () => {
-        return true;
-      },
-    });
-
-    if (response.status === 302) {
+    try {
+      const response = await axios.get(`${BASE_URL!}/`, {
+        validateStatus: () => true,
+      });
+      console.log("Server response:", response.data);
       return response.data;
-    } else {
-      throw new Error(`Error fetching goods. Status: ${response.status}`);
+    } catch (error) {
+      console.error("Error getting categories:", error);
+      throw error;
     }
   },
 
   addGood: async (good: IGood) => {
     try {
-      const response = await axios.post(BASE_URL!, good, {
+      const response = await axios.post(`${BASE_URL!}/add`, good, {
         validateStatus: () => true,
       });
       console.log("Server response:", response.data);

@@ -1,16 +1,11 @@
 export interface IGood {
   id?: number;
-  firstName: string;
-  lastName: string;
-  hireDate: string | null;
-  categoryId?: number | null;
-  location?: {
-    title?: string;
-    lng?: number;
-    lat?: number;
-  };
-  category?: {
-    id?: number;
-    title: string;
-  };
+  title: string;
+  category_id: any;
+  price: number;
+  manufacturer_id: any;
+  amount: number;
+  characteristic: any;
+  category?: string;
+  manufacturer?: string;
 }
