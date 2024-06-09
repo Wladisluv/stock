@@ -8,6 +8,7 @@ const AuthPage = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setError(""); // Reset error message before new login attempt
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
@@ -18,17 +19,17 @@ const AuthPage = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        // Успешная аутентификация
-        // Сохранение токена в состоянии или локальном хранилище
-        localStorage.setItem("token", email);
-        // Перенаправление пользователя на защищенную страницу
+        // Successful authentication
+        localStorage.setItem("token", data.user.email); // Example token storage
+        // Redirect user to a protected page
         window.location.href = "/goods";
       } else {
-        // Ошибка аутентификации
-        setError(data.error);
+        // Authentication error
+        setError(data.error || "Invalid login or password");
       }
     } catch (error) {
-      console.error("Ошибка при отправке запроса:", error);
+      console.error("Error submitting login request:", error);
+      setError("Неверный логин или пароль");
     }
   };
 

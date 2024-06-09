@@ -3,7 +3,6 @@ import { useRef, useEffect, useState } from "react";
 import * as maptilersdk from "@maptiler/sdk";
 import "@maptiler/sdk/dist/maptiler-sdk.css";
 import goodsStore from "../../stores/goods-store";
-
 import styles from "./Map.module.scss";
 
 interface Props {
@@ -23,73 +22,79 @@ const Map = ({ mapCall, onMapClick, goodMarker }: Props) => {
   const API_KEY: string = process.env.REACT_APP_MAP_API_KEY!;
 
   maptilersdk.config.apiKey = API_KEY;
+  const initialCoordinates = [38.96942, 45.040795];
 
   useEffect(() => {
-    if (map.current) return; // предотвращает повторную инициализацию карты
+    if (map.current) return; // Prevents re-initializing the map
 
-    // Инициализация карты
+    // Initialize map
     map.current = new maptilersdk.Map({
       container: mapContainer.current!,
       style: maptilersdk.MapStyle.STREETS,
-      center: [38.96942, 45.040795],
+      center: initialCoordinates,
       zoom: zoom,
     });
 
-    // Добавление начального маркера на заданные координаты
-    const initialCoordinates = [38.96942, 45.040795];
-    const initialMarker = new maptilersdk.Marker({ color: "#0000FF" }) // Маркер синего цвета
-      ?.setLngLat(initialCoordinates)
+    // Add initial marker at given coordinates
+    const initialMarker = new maptilersdk.Marker({ color: "#0000FF" }) // Blue marker
+      .setLngLat(initialCoordinates)
       .addTo(map.current);
 
-    setMarker(initialMarker); // Сохранение маркера в стейте
+    setMarker(initialMarker); // Save marker in state
 
-    // Логика для карты, вызываемой со страницы
+    // Logic for map called from page
     if (mapCall === "page") {
       goodsStore?.goods?.forEach((emp) => {
-        const empMarker = new maptilersdk.Marker({ color: "#FF0000" })
-          .setLngLat([emp.lng, emp.lat])
-          .addTo(map.current);
+        if (!isNaN(emp.lng) && !isNaN(emp.lat)) {
+          const empMarker = new maptilersdk.Marker({ color: "#FF0000" })
+            .setLngLat([emp.lng, emp.lat])
+            .addTo(map.current);
 
-        const popup = new maptilersdk.Popup()
-          .setMaxWidth("300px")
-          .setText(emp.name);
+          const popup = new maptilersdk.Popup()
+            .setMaxWidth("300px")
+            .setText(emp.name);
 
-        empMarker.getElement().addEventListener("mouseenter", () => {
-          popup.addTo(map.current);
-        });
+          empMarker.getElement().addEventListener("mouseenter", () => {
+            popup.addTo(map.current);
+          });
 
-        empMarker.getElement().addEventListener("mouseleave", () => {
-          popup.remove();
-        });
+          empMarker.getElement().addEventListener("mouseleave", () => {
+            popup.remove();
+          });
 
-        empMarker.setPopup(popup);
+          empMarker.setPopup(popup);
+        }
       });
     }
 
-    // Обработка кликов на карте
+    // Handle map clicks
     if (mapCall !== "page") {
       map.current.on("click", async (e: any) => {
         const { lng, lat } = e?.lngLat;
 
-        if (marker) {
-          marker.remove();
-        }
+        if (!isNaN(lng) && !isNaN(lat)) {
+          if (marker) {
+            marker.remove();
+          }
 
-        const newMarker = new maptilersdk.Marker({ color: "#FF0000" })
-          ?.setLngLat([lng, lat])
-          .addTo(map.current);
+          const newMarker = new maptilersdk.Marker({ color: "#FF0000" })
+            .setLngLat([lng, lat])
+            .addTo(map.current);
 
-        setMarker(newMarker);
+          setMarker(newMarker);
 
-        const response = await fetch(
-          `${GEOCODER_BASE_URL}q=${lat}+${lng}&key=${process.env.REACT_APP_GEOCODER_API_KEY}`
-        );
-        const data = await response.json();
+          const response = await fetch(
+            `${GEOCODER_BASE_URL}q=${lat}+${lng}&key=${process.env.REACT_APP_GEOCODER_API_KEY}`
+          );
+          const data = await response.json();
 
-        setStreet(data.results[0].formatted);
+          if (data.results?.[0]?.formatted) {
+            setStreet(data.results[0].formatted);
 
-        if (onMapClick) {
-          onMapClick({ lng, lat, loc: data.results[0].formatted });
+            if (onMapClick) {
+              onMapClick({ lng, lat, loc: data.results[0].formatted });
+            }
+          }
         }
       });
     }
@@ -99,7 +104,7 @@ const Map = ({ mapCall, onMapClick, goodMarker }: Props) => {
         marker.remove();
       }
     };
-  }, [zoom, marker, mapCall, goodMarker, GEOCODER_BASE_URL, onMapClick]);
+  }, [zoom, mapCall, GEOCODER_BASE_URL, onMapClick]);
 
   return (
     <div

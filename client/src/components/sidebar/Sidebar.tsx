@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -12,7 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import WorkIcon from "@mui/icons-material/Work";
 import PublicIcon from "@mui/icons-material/Public";
-
+import LogoutIcon from "@mui/icons-material/Logout";  // Import the Logout icon
 import styles from "./Sidebar.module.scss";
 import { Factory, MonetizationOn } from "@mui/icons-material";
 
@@ -24,6 +23,12 @@ interface Props {
 type Anchor = "left";
 
 const Sidebar = ({ open, handleSidebarToggle }: Props) => {
+  const handleLogout = () => {
+    // Remove specific data from localStorage
+    localStorage.removeItem("token");  // example item
+    window.location.href = "/login";
+  };
+
   const links = (text: string) => {
     if (text.toLowerCase() === "товары и материалы") {
       text = "goods";
@@ -40,6 +45,7 @@ const Sidebar = ({ open, handleSidebarToggle }: Props) => {
     console.log("text", text);
     return text;
   };
+
   const icons = [
     AccountCircleIcon,
     WorkIcon,
@@ -47,6 +53,7 @@ const Sidebar = ({ open, handleSidebarToggle }: Props) => {
     Factory,
     PublicIcon,
   ];
+
   const list = (anchor: Anchor) => (
     <>
       <div className={styles.title}>
@@ -62,7 +69,7 @@ const Sidebar = ({ open, handleSidebarToggle }: Props) => {
           "О нас",
         ].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <Link to={links(text)} style={{ width: "100%", maxWidth: "200px" }}>
+            <Link to={links(text)} style={{ width: "100%", maxWidth: "250px" }}>
               <ListItemButton onClick={handleSidebarToggle}>
                 <ListItemIcon style={{ color: "#fff" }}>
                   {React.createElement(icons[index])}
@@ -72,6 +79,17 @@ const Sidebar = ({ open, handleSidebarToggle }: Props) => {
             </Link>
           </ListItem>
         ))}
+      </List>
+      <Divider sx={{ bgcolor: "#8D8D8D", marginTop: "auto" }} />
+      <List className={styles.list}>
+        <ListItem disablePadding>
+          <ListItemButton onClick={handleLogout} style={{ color: "#fff" }}>
+            <ListItemIcon style={{ color: "#fff" }}>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Выйти" className={styles.text} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </>
   );
