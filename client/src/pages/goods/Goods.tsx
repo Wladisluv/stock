@@ -31,7 +31,7 @@ const Goods = observer(() => {
     <>
       <div className={styles.top}>
         <div>
-          <h1>Товары и материалы</h1>
+          <h1 className={styles.mainText}>Товары и материалы</h1>
         </div>
         <div>
           <GoodDialog modalFunction="add" />

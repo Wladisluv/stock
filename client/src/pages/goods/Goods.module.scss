@@ -109,6 +109,10 @@
    display: none;
   }
 
+  .mainText {
+    font-size: 36px;
+  }
+
   .btn {
     margin-top: 10px;
     text-align: start;
@@ -136,7 +140,7 @@
     display: flex;
     flex-direction:row;
     gap: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
   }
 
   .divider {
