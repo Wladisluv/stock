@@ -92,13 +92,13 @@ export default function ActionsButton({ editFoo, removedItem }: Props) {
         <div onClick={handleClose}>
           <MenuItem onClick={editFoo} disableRipple>
             <EditIcon />
-            Edit
+            Редактировать
           </MenuItem>
         </div>
         <div onClick={handleClose}>
           <MenuItem onClick={removedItem} disableRipple>
             <DeleteIcon />
-            Remove
+            Удалить
           </MenuItem>
         </div>
       </StyledMenu>

@@ -70,3 +70,86 @@
     max-width: 300px;
   }
 }
+
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.search {
+  width: 100%;
+  max-width: 360px;
+  margin: 20px auto;
+}
+
+.main {
+  margin: 20px 0;
+}
+
+.mainTop {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.btn {
+  margin-top: -10px;
+  text-align: end;
+}
+
+@media (max-width: 770px) {
+  .mainTop {
+   display: none;
+  }
+
+  .btn {
+    margin-top: 10px;
+    text-align: start;
+  }
+
+  .contentItem {
+    display: flex;
+
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .main {
+    max-height: 450px;
+    overflow-x: scroll;
+  }
+
+  .contentInner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .top {
+    display: flex;
+    flex-direction:row;
+    gap: 20px;
+    margin-bottom: 100px;
+  }
+
+  .divider {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+}
+
+.stub {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.alert {
+  margin-bottom: 20px;
+}

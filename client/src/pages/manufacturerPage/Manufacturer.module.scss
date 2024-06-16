@@ -26,6 +26,12 @@
   }
 }
 
+
+.btn {
+  margin-top: -10px;
+  text-align: end;
+}
+
 .stub {
   display: flex;
   align-items: center;
@@ -43,5 +49,37 @@
     justify-content: space-between;
     max-width: 300px;
     height: 120px;
+  }
+
+  .mainTop {
+    display: none;
+  }
+
+  .mainText {
+    font-size: 36px;
+  }
+
+  .main {
+    max-height: 600px;
+    overflow-x: scroll;
+  }
+
+
+  .contentItem {
+    display: flex;
+
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .contentInner {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn {
+    margin-top: 10px;
+    text-align: start;
   }
 }

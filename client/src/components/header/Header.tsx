@@ -31,7 +31,7 @@ const Header = ({ isAuthPage = false }: Props) => {
             </IconButton>
           </div>
         )}
-        <div>
+        <div className={styles.name}>
           <h2>{isAuthPage ? "Сток" : `${localStorage.getItem('token')}`}</h2>
         </div>
       </div>

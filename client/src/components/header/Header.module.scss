@@ -27,3 +27,9 @@
     display: block;
   }
 }
+
+@media (max-width: 770px) {
+  .name {
+    margin-right: 200px;
+  }
+}

@@ -17,7 +17,7 @@ const Manufacturer = observer(() => {
     <>
       <div className={styles.top}>
         <div>
-          <h1>Производители</h1>
+          <h1 className={styles.mainText}>Производители</h1>
         </div>
         <div>
           <ManufacturerDialog modalFunction="add" />
@@ -49,10 +49,7 @@ const Manufacturer = observer(() => {
                   <div>{"Россия"}</div>
                   <div>{manufacturer.email}</div>
                   <div
-                    style={{
-                      textAlign: "end",
-                      marginTop: "-10px",
-                    }}
+                    className={styles.btn}
                   >
                     <ManufacturerDialog
                       modalFunction="edit"

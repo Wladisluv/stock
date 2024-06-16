@@ -41,7 +41,7 @@ const Goods = observer(() => {
         className={styles.search}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        sx={{ width: "360px", marginTop: "20px" }}
+        sx={{ width: "100%", maxWidth: "360px", marginTop: "20px" }}
         endAdornment={
           <InputAdornment position="end">
             <SearchIcon />
@@ -50,77 +50,53 @@ const Goods = observer(() => {
         type="search"
         placeholder="Поиск товаров"
       />
-      {window.innerWidth > 770 ? (
-        <>
-          <div className={styles.main}>
-            <div className={styles.mainTop}>
-              <div>КАТЕГОРИЯ</div>
-              <div>НАЗВАНИЕ</div>
-              <div>ХАРАКТЕРИСТИКИ</div>
-              <div style={{ marginLeft: "20px", maxWidth: "100px" }}>ЦЕНА</div>
-              <div>КОЛИЧЕСТВО</div>
-              <div>ПРОИЗВОДИТЕЛЬ</div>
-              <div style={{ textAlign: "end" }}>ДЕЙСТВИЯ</div>
-            </div>
-            <Divider
-              sx={{
-                marginTop: "10px",
-                marginLeft: "-20px",
-                marginRight: "-20px",
-              }}
-              className={styles.divider}
-            />
-            {searchedGoods.length === 0 ? (
-              <h2 className={styles.stub}>Товары и материалы не найдены 🔎</h2>
-            ) : (
-              searchedGoods.map((good) => (
-                <div className={styles.contentItem} key={good.id}>
-                  <div className={styles.contentInner}>
-                    <div>{good.category}</div>
-                    <div style={{ marginLeft: "80px" }}>{good.title}</div>
-                    <div style={{ marginLeft: "80px" }}>
-                      <Tooltip title={good.characteristic}>
-                        <Chip
-                          style={{ maxWidth: "150px" }}
-                          label={good.characteristic}
-                          color="primary"
-                        />
-                      </Tooltip>
-                    </div>
-                    <div style={{ marginLeft: "40px" }}>{good.price}</div>
-                    <div style={{ marginLeft: "35px" }}>{good.amount}</div>
-                    <div style={{ marginLeft: "50px" }}>
-                      {good.manufacturer}
-                    </div>
-                    <div style={{ textAlign: "end", marginTop: "-10px" }}>
-                      <GoodDialog modalFunction="edit" goodId={good.id} />
-                    </div>
-                  </div>
-                  <Divider sx={{ marginTop: "10px" }} />
-                </div>
-              ))
-            )}
-          </div>
-        </>
-      ) : (
-        <div className={styles.main}>
-          <div className={styles.mainTop}>
-            <div>PERSON</div>
-            <div style={{ textAlign: "end" }}>ДЕЙСТВИЯ</div>
-          </div>
-          <Divider
-            sx={{
-              marginTop: "10px",
-              marginLeft: "-20px",
-              marginRight: "-20px",
-            }}
-            className={styles.divider}
-          />
-          {searchedGoods.length === 0 && (
-            <h2 className={styles.stub}>Товары и материалы не найдены 🔎</h2>
-          )}
+      <div className={styles.main}>
+        <div className={styles.mainTop}>
+          <div>КАТЕГОРИЯ</div>
+          <div>НАЗВАНИЕ</div>
+          <div>ХАРАКТЕРИСТИКИ</div>
+          <div style={{ marginLeft: "20px", maxWidth: "100px" }}>ЦЕНА</div>
+          <div>КОЛИЧЕСТВО</div>
+          <div>ПРОИЗВОДИТЕЛЬ</div>
+          <div style={{ textAlign: "end" }}>ДЕЙСТВИЯ</div>
         </div>
-      )}
+        <Divider
+          sx={{
+            marginTop: "10px",
+            marginLeft: "-20px",
+            marginRight: "-20px",
+          }}
+          className={styles.divider}
+        />
+        {searchedGoods.length === 0 ? (
+          <h2 className={styles.stub}>Товары и материалы не найдены 🔎</h2>
+        ) : (
+          searchedGoods.map((good) => (
+            <div className={styles.contentItem} key={good.id}>
+              <div className={styles.contentInner}>
+                <div>{good.category}</div>
+                <div className={styles.mobileHidden}>{good.title}</div>
+                <div className={styles.mobileHidden}>
+                  <Tooltip title={good.characteristic}>
+                    <Chip
+                      style={{ maxWidth: "150px" }}
+                      label={good.characteristic}
+                      color="primary"
+                    />
+                  </Tooltip>
+                </div>
+                <div>{good.price}</div>
+                <div>{good.amount}</div>
+                <div className={styles.mobileHidden}>{good.manufacturer}</div>
+                <div className={styles.btn}>
+                  <GoodDialog modalFunction="edit" goodId={good.id} />
+                </div>
+              </div>
+              <Divider sx={{ marginTop: "10px" }} />
+            </div>
+          ))
+        )}
+      </div>
     </>
   );
 });
