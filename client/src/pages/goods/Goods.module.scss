@@ -110,7 +110,7 @@
   }
 
   .mainText {
-    font-size: 36px;
+    font-size: 22px;
   }
 
   .btn {
@@ -120,7 +120,6 @@
 
   .contentItem {
     display: flex;
-
     flex-direction: column;
     padding: 10px;
   }
@@ -138,9 +137,9 @@
 
   .top {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     gap: 20px;
-    margin-bottom: 50px;
+    // margin-bottom: -50px;
   }
 
   .divider {
